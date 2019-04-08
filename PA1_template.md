@@ -67,7 +67,7 @@ maxTimeInt <- which.max(stepsByInterval$steps)
 maxTime <- stepsByInterval$interval[maxTimeInt]
 maxSteps <- stepsByInterval$steps[maxTimeInt]
 maxStepsR <- round(maxSteps)
-pointLabel <- paste0("(", stepsByInterval$interval[maxTimeInt], ", ", maxStepsR,")")
+pointLabel <- paste0("(", maxTime, ", ", maxStepsR,")")
 
 ggplot(stepsByInterval,aes(x=interval,y=steps)) + geom_line() +
     annotate("point",x=maxTime, y=maxSteps,colour = "blue") +
@@ -78,8 +78,8 @@ ggplot(stepsByInterval,aes(x=interval,y=steps)) + geom_line() +
 
 ![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
-The plot shows also the point with maximum number of steps. Average maximum number
-of steps is 206 on the interval 835.
+The plot shows also the point with maximum number of steps. So, maximum of average
+number of steps is 206 on the interval 835.
 
 ## Imputing missing values
 
@@ -139,7 +139,6 @@ And makes histogram of total number of steps on imputed data.
 
 ```r
 ggplot(stepsByDay2,aes(steps)) + geom_histogram(binwidth = bw2) + 
-    geom_vline(xintercept=meanSteps2,colour = "green") + 
     geom_vline(xintercept = medianSteps2, colour = "red") + 
     xlab("Number of steps") + ylab("Frequency")
 ```
@@ -162,7 +161,7 @@ ggplot(stepsByDayBig,aes(steps)) + geom_histogram(binwidth = bw) +
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-Scripts adds new factor variable "dayType" - weekday/ weekend to discover it.
+Script adds new factor variable "dayType" - weekday/ weekend to discover it.
 
 ```r
 dataWeekDays <- weekdays(dataImputed$date)
@@ -184,5 +183,5 @@ ggplot(stepsByIntervalCompare,aes(x=interval,y=steps)) + geom_line() +
 
 ![](PA1_template_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
 
-So, there are now such a morning peak on weekends as on weekdays, but all weekend
+So, there is now such a morning peak on weekends as on weekdays, but all weekend
 day is a little bit more active.

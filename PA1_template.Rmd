@@ -62,7 +62,7 @@ maxTimeInt <- which.max(stepsByInterval$steps)
 maxTime <- stepsByInterval$interval[maxTimeInt]
 maxSteps <- stepsByInterval$steps[maxTimeInt]
 maxStepsR <- round(maxSteps)
-pointLabel <- paste0("(", stepsByInterval$interval[maxTimeInt], ", ", maxStepsR,")")
+pointLabel <- paste0("(", maxTime, ", ", maxStepsR,")")
 
 ggplot(stepsByInterval,aes(x=interval,y=steps)) + geom_line() +
     annotate("point",x=maxTime, y=maxSteps,colour = "blue") +
@@ -71,8 +71,8 @@ ggplot(stepsByInterval,aes(x=interval,y=steps)) + geom_line() +
     xlab("Time interval") + ylab("Number of steps")
 ```
 
-The plot shows also the point with maximum number of steps. Average maximum number
-of steps is `r maxStepsR` on the interval `r maxTime`.
+The plot shows also the point with maximum number of steps. So, maximum of average
+number of steps is `r maxStepsR` on the interval `r maxTime`.
 
 ## Imputing missing values
 
@@ -107,7 +107,6 @@ medianSteps2
 And makes histogram of total number of steps on imputed data.
 ```{r}
 ggplot(stepsByDay2,aes(steps)) + geom_histogram(binwidth = bw2) + 
-    geom_vline(xintercept=meanSteps2,colour = "green") + 
     geom_vline(xintercept = medianSteps2, colour = "red") + 
     xlab("Number of steps") + ylab("Frequency")
 ```
@@ -125,7 +124,7 @@ ggplot(stepsByDayBig,aes(steps)) + geom_histogram(binwidth = bw) +
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-Scripts adds new factor variable "dayType" - weekday/ weekend to discover it.
+Script adds new factor variable "dayType" - weekday/ weekend to discover it.
 ```{r}
 dataWeekDays <- weekdays(dataImputed$date)
 dataWeekDays<-gsub("Monday","weekday",dataWeekDays)
@@ -144,5 +143,5 @@ ggplot(stepsByIntervalCompare,aes(x=interval,y=steps)) + geom_line() +
     xlab("Time interval") + ylab("Number of steps")
 ```
 
-So, there are now such a morning peak on weekends as on weekdays, but all weekend
+So, there is now such a morning peak on weekends as on weekdays, but all weekend
 day is a little bit more active.
